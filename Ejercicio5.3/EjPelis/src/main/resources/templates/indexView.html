@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elige tu película favorita</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> 
+    <style> td { border: 1px solid #ddd;}  </style>
+  </head>
+<body>
+<h1>Elige tu película favorita</h1>
+<p th:if="${mensaje}" th:text="${mensaje}"></p>
+<form action="/voto" method="post">
+  <div class="mb-3">
+    <label for="email">Introduce tu email</label>
+    <input type="email" id="email" name="email" class="form-control" required>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <img src="avatar.jpg" alt="Avatar" style="width:200px;">
+        <br>
+        <input type="radio" name="peli" value="0" required>
+        <label>Avatar</label>
+        <br>
+        <i class="bi bi-heart"></i>
+        <span th:text="${votos[0]}">0</span>
+      </td>
+      <td>
+        <img src="cadenaPerpetua.jpg" alt="Cadena Perpetua" style="width:200px;">
+        <br>
+        <input type="radio" name="peli" value="1" required>
+        <label>Cadena Perpetua</label>
+        <br>
+        <i class="bi bi-heart"></i>
+        <span th:text="${votos[1]}">0</span>
+      </td>
+      <td>
+        <img src="pulpFiction.jpg" alt="Pulp Fiction" style="width:200px;">
+        <br>
+        <input type="radio" name="peli" value="2" required>
+        <label>Pulp Fiction</label>
+        <br>
+        <i class="bi bi-heart"></i>
+        <span th:text="${votos[2]}">0</span>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <button type="submit" class="btn btn-primary">Votar</button>
+</form>
+</body>
+</html>

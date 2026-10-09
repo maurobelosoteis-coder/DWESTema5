@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paises</title>
+  </head>
+  <body>
+    <h4>Info de paises</h4>
+    <!--
+      Recibe el objeto DTO formInfo de @GetMapping("/"), que es el que va a representar el formulario. 
+      Sólo necesitamos el nombre del país, de ahí que hayamos creado un DTO con el dato estrictamente necesario.
+      También se recibe la lista de paises (variable listaPaises) de tipo List<String>, que se va a utilizar para rellenar el select.
+    -->
+    <form method="post" action="#" th:action="@{/}" th:object="${formInfo}">
+        <select onchange="this.form.submit()" th:field="*{nombre}" required> 
+              <option value="" disabled selected>selecciona un país...</option>
+              <option th:each="pais:${listaPaises}"
+                      th:value="${pais}" th:text="${pais}">
+              </option>
+        </select>
+        <!-- <input type="submit" value="Enviar" /> -->
+    </form>
+    <!--
+      Se recibe del @PostMapping("/") como variables independientes el nombre, capital y población del país seleccionado,
+      además de la lista de paises (variable listaPaises) de tipo List<String>, que se va a utilizar para rellenar el select y
+      el objeto DTO formInfo, que es el que va a representar el formulario.
+    -->
+    País:<span th:text="${pais}">*</span><br/>
+    Capital:<span th:text="${capital}">*</span><br/>
+    Población:<span th:text="${poblacion}">*</span><br/>   
+  </body>
+</html>

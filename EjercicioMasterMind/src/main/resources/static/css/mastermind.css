@@ -1,0 +1,167 @@
+/* ===== Base ===== */
+:root {
+  --bg: #f3f4f8;
+  --card: #ffffff;
+  --text: #22252f;
+  --muted: #6b7080;
+  --line: #dfe2ea;
+  --accent: #3b5bdb;
+  --ok: #2b8a3e;
+  --ok-bg: #e6f4ea;
+  --bad: #c92a2a;
+  --bad-bg: #fdecec;
+  --warn: #b35c00;
+  --warn-bg: #fff4e0;
+  --play-bg: #e8edff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+/* Centered white card that holds each page */
+.card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  margin-top: 0;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.intro { color: var(--muted); }
+
+/* ===== Forms ===== */
+label { font-weight: 600; }
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+input[type="text"] {
+  font-family: ui-monospace, Consolas, monospace;
+  letter-spacing: 0.25em;
+  width: 12rem;
+}
+
+button,
+input[type="submit"] {
+  padding: 0.55rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover { filter: brightness(1.1); }
+
+.config td { padding: 0.4rem 0.6rem 0.4rem 0; }
+
+.guess-form {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 0.5rem 0 1rem;
+}
+
+/* ===== Errors ===== */
+.cssError { color: var(--bad); font-weight: 600; }
+input.cssError,
+select.cssError { border: 2px solid var(--bad); }
+
+/* ===== Status bar: game state + remaining tries ===== */
+.status {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.5rem;
+}
+
+.status-box {
+  flex: 1;
+  min-width: 10rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.status-box .label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.status-box .value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+/* One colour per game state (class added by Thymeleaf) */
+.estado-JUGANDO { background: var(--play-bg); color: var(--accent); }
+.estado-GANO    { background: var(--ok-bg);   color: var(--ok); }
+.estado-PERDIO  { background: var(--bad-bg);  color: var(--bad); }
+
+/* Remaining tries: neutral, turns orange when few are left */
+.intentos       { background: var(--bg); }
+.intentos.pocos { background: var(--warn-bg); color: var(--warn); }
+
+/* ===== Guess history table ===== */
+table.historial {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.historial th,
+.historial td {
+  padding: 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.historial th {
+  background: var(--bg);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.historial tbody tr:nth-child(even) { background: #fafbfd; }
+
+.historial .comb {
+  font-family: ui-monospace, Consolas, monospace;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+}
+
+.historial .bien { color: var(--ok);   font-weight: 700; }
+.historial .mal  { color: var(--warn); font-weight: 700; }
+
+/* ===== Links ===== */
+a { color: var(--accent); font-weight: 600; }
+.volver { display: inline-block; margin-top: 1.5rem; }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MasterMind</title>
+  <link rel="stylesheet" th:href="@{/css/mastermind.css}" href="../static/css/mastermind.css">
+</head>
+<body>
+<main class="card">
+  <h1>MasterMind</h1>
+  <p class="intro" th:text="|Adivina un número de ${tamNumero} cifras distintas|"></p>
+
+  <div class="status">
+    <div class="status-box" th:classappend="${'estado-' + estadoJuego}">
+      <span class="label">Estado</span>
+      <span class="value" th:text="${estadoJuego}">JUGANDO</span>
+    </div>
+    <div class="status-box intentos" th:classappend="${intentosRestantes <= 2} ? 'pocos'">
+      <span class="label">Intentos restantes</span>
+      <span class="value" th:text="${intentosRestantes}">10</span>
+    </div>
+  </div>
+  <p th:if="${numeroSecreto}">El número secreto era <strong th:text="${numeroSecreto}">xxxx</strong></p>
+  <label for="intento">Nuevo intento:</label>
+  <form class="guess-form" method="post" th:action="@{/juego}" th:object="${formInfo}">
+    <input type="text" id="intento" th:field="*{intento}">
+    <input type="submit" value="Enviar">
+  </form>
+  <p th:if="${mensajeError}" th:text="${mensajeError}" class="cssError"></p>
+
+  <h2>Lista de intentos</h2>
+  <table class="historial">
+    <thead>
+      <tr><th>Intento</th><th>Bien colocados</th><th>Mal colocados</th></tr>
+    </thead>
+    <tbody>
+      <tr th:each="intento : ${listaIntentos}">
+        <td class="comb" th:text="${intento.combinacion}">1234</td>
+        <td class="bien" th:text="${intento.bienColocados}">0</td>
+        <td class="mal"  th:text="${intento.malColocados}">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="volver" th:href="@{/}">← Inicio</a>
+</main>
+</body>
+</html>
